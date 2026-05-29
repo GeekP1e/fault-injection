@@ -1,0 +1,28 @@
+name: "Critical Brake System Test"
+description: "Тест тормозной системы при экстремальных отказах"
+duration_ms: 30000
+
+faults:
+  - type: BitFlip
+    probability: 0.05
+    start_ms: 0
+    
+  - type: MessageLoss
+    rate: 0.02
+    start_ms: 5000
+    end_ms: 25000
+    
+  - type: BusOff
+    duration_ms: 100
+    start_ms: 10000
+    
+  - type: Delay
+    duration_ms: 50
+    start_ms: 15000
+    end_ms: 20000
+
+monitors:
+  - metric: "message_count"
+    expected_min: 1000
+  - metric: "error_rate"
+    expected_max: 0.10

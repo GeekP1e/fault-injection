@@ -1,0 +1,14 @@
+name: "Network Issues Simulation"
+description: "Имитация проблем с сетью"
+duration_ms: 10000
+
+faults:
+  - type: MessageLoss
+    rate: 0.10
+    
+  - type: Delay
+    duration_ms: 100
+
+monitors:
+  - metric: "delivery_rate"
+    expected_min: 0.85
